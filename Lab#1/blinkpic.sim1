@@ -1,0 +1,97 @@
+<circuit version="1.0.0-SR1" rev="1448" stepSize="1000000" stepsPS="1000000" NLsteps="100000" reaStep="1000000" animate="0" >
+
+<item itemtype="SerialPort" CircId="SerialPortWidget-38" mainComp="false" Show_id="false" Show_Val="false" Pos="0,0" rotation="0" hflip="1" vflip="1" idLabPos="-20,-32" labelrot="0" valLabPos="-16,20" valLabRot="0" Baudrate="9600 _Bauds" DataBits="8 _Bits" StopBits="1 _Bits" />
+
+<item itemtype="MCU" CircId="p12F683-39" mainComp="false" Show_id="true" Show_Val="false" Pos="-624,-372" rotation="0" hflip="1" vflip="1" label="p12F683-39" idLabPos="0,-20" labelrot="0" valLabPos="-16,20" valLabRot="0" varList="GPIO/0x0005/uint8" Frequency="16 MHz" Program="blink.hex" Auto_Load="false" Rst_enabled="false" Ext_Osc="false" Wdt_enabled="false" />
+
+<item itemtype="Subcircuit" CircId="Real_Button-151" mainComp="false" Show_id="true" Show_Val="false" Pos="-800,-376" rotation="0" hflip="1" vflip="1" label="Real_Button-151" idLabPos="0,-20" labelrot="0" valLabPos="-16,20" valLabRot="0" Logic_Symbol="true" />
+
+<item itemtype="Subcircuit" CircId="MC14495-176" mainComp="false" Show_id="true" Show_Val="false" Pos="-460,-428" rotation="0" hflip="1" vflip="1" label="MC14495-176" idLabPos="0,-20" labelrot="0" valLabPos="-16,20" valLabRot="0" Logic_Symbol="true" />
+
+<item itemtype="Seven Segment" CircId="Seven Segment-177" mainComp="false" Show_id="false" Show_Val="false" Pos="-252,-396" rotation="0" hflip="1" vflip="1" label="Seven Segment-177" idLabPos="20,-44" labelrot="0" valLabPos="-16,20" valLabRot="0" NumDisplays="1 _7seg" Color="Yellow" Vertical_Pins="false" CommonCathode="true" Threshold="2.4 V" MaxCurrent="0.02 A" Resistance="1 Ω" />
+
+<item itemtype="Seven Segment" CircId="Seven Segment-179" mainComp="false" Show_id="false" Show_Val="false" Pos="-252,-308" rotation="0" hflip="1" vflip="1" label="Seven Segment-179" idLabPos="20,-44" labelrot="0" valLabPos="-16,20" valLabRot="0" NumDisplays="1 _7seg" Color="Yellow" Vertical_Pins="false" CommonCathode="true" Threshold="2.4 V" MaxCurrent="0.02 A" Resistance="1 Ω" />
+
+<item itemtype="Buffer" CircId="Buffer-613" mainComp="false" Show_id="false" Show_Val="false" Pos="-516,-356" rotation="0" hflip="1" vflip="1" label="Buffer-613" idLabPos="-16,-24" labelrot="0" valLabPos="-16,20" valLabRot="0" Tristate="false" Inverted="false" Open_Collector="false" Input_High_V="2.5 V" Input_Low_V="2.5 V" Input_Imped="1000 MΩ" Out_High_V="5 V" Out_Low_V="-2 V" Out_Imped="40 Ω" initHigh="false" Tpd_ps="10000 ps" Tr_ps="3000 ps" Tf_ps="4000 ps" />
+
+<item itemtype="Buffer" CircId="Buffer-616" mainComp="false" Show_id="false" Show_Val="false" Pos="-388,-208" rotation="0" hflip="1" vflip="1" label="Buffer-616" idLabPos="-16,-24" labelrot="0" valLabPos="-16,20" valLabRot="0" Tristate="false" Inverted="true" Open_Collector="false" Input_High_V="2.5 V" Input_Low_V="2.5 V" Input_Imped="1000 MΩ" Out_High_V="5 V" Out_Low_V="-2 V" Out_Imped="40 Ω" initHigh="false" Tpd_ps="10000 ps" Tr_ps="3000 ps" Tf_ps="4000 ps" />
+
+<item itemtype="Node" CircId="Node-192" mainComp="false" Pos="-308,-420" />
+
+<item itemtype="Node" CircId="Node-195" mainComp="false" Pos="-316,-412" />
+
+<item itemtype="Node" CircId="Node-198" mainComp="false" Pos="-332,-396" />
+
+<item itemtype="Node" CircId="Node-201" mainComp="false" Pos="-324,-404" />
+
+<item itemtype="Node" CircId="Node-225" mainComp="false" Pos="-340,-388" />
+
+<item itemtype="Node" CircId="Node-228" mainComp="false" Pos="-348,-380" />
+
+<item itemtype="Node" CircId="Node-231" mainComp="false" Pos="-356,-372" />
+
+<item itemtype="Node" CircId="Node-619" mainComp="false" Pos="-500,-208" />
+
+<item itemtype="Connector" uid="connector-584" startpinid="MC14495-176-a" endpinid="Node-192-0" pointList="-420,-420,-308,-420" />
+
+<item itemtype="Connector" uid="connector-585" startpinid="MC14495-176-b" endpinid="Node-195-0" pointList="-420,-412,-316,-412" />
+
+<item itemtype="Connector" uid="connector-586" startpinid="MC14495-176-c" endpinid="Node-201-0" pointList="-420,-404,-324,-404" />
+
+<item itemtype="Connector" uid="connector-587" startpinid="MC14495-176-d" endpinid="Node-198-0" pointList="-420,-396,-332,-396" />
+
+<item itemtype="Connector" uid="connector-588" startpinid="MC14495-176-e" endpinid="Node-225-0" pointList="-420,-388,-340,-388" />
+
+<item itemtype="Connector" uid="connector-589" startpinid="MC14495-176-f" endpinid="Node-228-0" pointList="-420,-380,-348,-380" />
+
+<item itemtype="Connector" uid="connector-590" startpinid="MC14495-176-g" endpinid="Node-231-0" pointList="-420,-372,-356,-372" />
+
+<item itemtype="Connector" uid="connector-591" startpinid="Node-195-2" endpinid="Seven Segment-177-pin_b" pointList="-316,-412,-276,-412" />
+
+<item itemtype="Connector" uid="connector-592" startpinid="Seven Segment-179-pin_d" endpinid="Node-198-1" pointList="-276,-308,-332,-308,-332,-396" />
+
+<item itemtype="Connector" uid="connector-593" startpinid="Node-198-2" endpinid="Seven Segment-177-pin_d" pointList="-332,-396,-276,-396" />
+
+<item itemtype="Connector" uid="connector-594" startpinid="Seven Segment-179-pin_c" endpinid="Node-201-1" pointList="-276,-316,-324,-316,-324,-404" />
+
+<item itemtype="Connector" uid="connector-595" startpinid="Node-201-2" endpinid="Seven Segment-177-pin_c" pointList="-324,-404,-276,-404" />
+
+<item itemtype="Connector" uid="connector-596" startpinid="Node-192-2" endpinid="Seven Segment-177-pin_a" pointList="-308,-420,-276,-420" />
+
+<item itemtype="Connector" uid="connector-597" startpinid="Seven Segment-179-pin_e" endpinid="Node-225-1" pointList="-276,-300,-340,-300,-340,-388" />
+
+<item itemtype="Connector" uid="connector-598" startpinid="Node-225-2" endpinid="Seven Segment-177-pin_e" pointList="-340,-388,-276,-388" />
+
+<item itemtype="Connector" uid="connector-599" startpinid="Seven Segment-179-pin_f" endpinid="Node-228-1" pointList="-276,-292,-348,-292,-348,-380" />
+
+<item itemtype="Connector" uid="connector-600" startpinid="Node-228-2" endpinid="Seven Segment-177-pin_f" pointList="-348,-380,-276,-380" />
+
+<item itemtype="Connector" uid="connector-601" startpinid="Seven Segment-179-pin_g" endpinid="Node-231-1" pointList="-276,-284,-356,-284,-356,-372" />
+
+<item itemtype="Connector" uid="connector-602" startpinid="Node-231-2" endpinid="Seven Segment-177-pin_g" pointList="-356,-372,-276,-372" />
+
+<item itemtype="Connector" uid="connector-603" startpinid="p12F683-39-PORTP2" endpinid="MC14495-176-B" pointList="-584,-340,-540,-340,-540,-412,-468,-412" />
+
+<item itemtype="Connector" uid="connector-604" startpinid="p12F683-39-PORTP1" endpinid="MC14495-176-A" pointList="-584,-348,-548,-348,-548,-420,-468,-420" />
+
+<item itemtype="Connector" uid="connector-605" startpinid="Real_Button-151-Q" endpinid="p12F683-39-PORTP3" pointList="-760,-368,-700,-368,-700,-340,-632,-340" />
+
+<item itemtype="Connector" uid="connector-606" startpinid="p12F683-39-PORTP4" endpinid="MC14495-176-C" pointList="-632,-348,-668,-348,-668,-404,-468,-404" />
+
+<item itemtype="Connector" uid="connector-607" startpinid="p12F683-39-PORTP5" endpinid="MC14495-176-D" pointList="-632,-356,-660,-356,-660,-396,-468,-396" />
+
+<item itemtype="Connector" uid="connector-609" startpinid="Seven Segment-179-pin_a" endpinid="Node-192-1" pointList="-276,-332,-308,-332,-308,-420" />
+
+<item itemtype="Connector" uid="connector-610" startpinid="Seven Segment-179-pin_b" endpinid="Node-195-1" pointList="-276,-324,-316,-324,-316,-412" />
+
+<item itemtype="Connector" uid="Connector-614" startpinid="p12F683-39-PORTP0" endpinid="Buffer-613-in0" pointList="-584,-356,-532,-356" />
+
+<item itemtype="Connector" uid="Connector-615" startpinid="Buffer-613-out" endpinid="Node-619-0" pointList="-500,-356,-500,-208" />
+
+<item itemtype="Connector" uid="Connector-617" startpinid="Buffer-616-out" endpinid="Seven Segment-179-pin_commona" pointList="-372,-208,-244,-208,-244,-276" />
+
+<item itemtype="Connector" uid="Connector-618" startpinid="Buffer-616-in0" endpinid="Node-619-1" pointList="-404,-208,-500,-208" />
+
+<item itemtype="Connector" uid="Connector-620" startpinid="Node-619-2" endpinid="Seven Segment-177-pin_commona" pointList="-500,-208,-500,-156,-128,-156,-128,-364,-244,-364" />
+
+</circuit>
