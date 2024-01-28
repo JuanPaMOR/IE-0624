@@ -574,7 +574,7 @@ Circuit Id: Voltage Source-4353
 
 Unique  Id: SerialPort-2: 
 Circuit Id: SerialPort-2
-<item x="444" labelx="-34" valLabelx="0" Auto_Open="false" Show_id="false" BaudRate="9600" FlowControl="0" labely="-20" valLabRot="0" rotation="0" circPos="0,0" hflip="1" Port_Name="/tmp/ttyS0" id="SerialPort-2" vflip="1" Mcu_Id="Arduino Uno-1" DataBits="8" boardRot="-1e+6" valLabely="0" objectName="SerialPort-2" mainComp="false" Parity="0" labelrot="0" itemtype="SerialPort" StopBits="1" boardPos="-1e+6,-1e+6" circRot="-1.931402135782828e-181" Mcu_Uart="1" y="16"/>
+<item x="348" labelx="-34" valLabelx="0" Auto_Open="false" Show_id="false" BaudRate="9600" FlowControl="0" labely="-20" valLabRot="0" rotation="0" circPos="0,0" hflip="1" Port_Name="/tmp/ttyS0" id="SerialPort-2" vflip="1" Mcu_Id="Arduino Uno-1" DataBits="8" boardRot="-1e+6" valLabely="0" objectName="SerialPort-2" mainComp="false" Parity="0" labelrot="0" itemtype="SerialPort" StopBits="1" boardPos="-1e+6,-1e+6" circRot="-1.931402135782828e-181" Mcu_Uart="1" y="-92"/>
 
 Unique  Id: Connector-1360: 
 Circuit Id: Connector-784
