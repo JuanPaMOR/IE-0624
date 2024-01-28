@@ -35,9 +35,8 @@ void setup() {
   pinMode(PIN_SIGNO2, INPUT);
   pinMode(PIN_SIGNO3, INPUT);
   pinMode(PIN_SIGNO4, INPUT);
-
+  Serial.begin(9600);
   lcd.begin(84, 48);
-
 }
 
 
@@ -155,7 +154,6 @@ void loop() {
   lcd.print(Volt1,DEC);
   lcd.print(rms);
 
-
   lcd.setCursor(0, 3);
   lcd.print("V2: ");
   lcd.print(signo2);
@@ -173,6 +171,27 @@ void loop() {
   lcd.print(signo4);
   lcd.print(Volt4,DEC);
   lcd.print(rms);
+
+
+  Serial.print(MODO);
+
+  Serial.print(",");
+  Serial.print(signo1);
+  Serial.print(Volt1,DEC);
+
+  Serial.print(",");
+  Serial.print(signo2);
+  Serial.print(Volt2,DEC);
+
+  Serial.print(",");
+  Serial.print(signo3);
+  Serial.print(Volt3,DEC);
+
+
+  Serial.print(",");
+  Serial.print(signo4);
+  Serial.print(Volt4,DEC);
+  Serial.println();
   delay(200);
 }
 
