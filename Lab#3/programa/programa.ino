@@ -15,11 +15,14 @@
 static const byte glyph[] = { B00010000, B00110100, B00110000, B00110100, B00010000 };
 static PCD8544 lcd;
 int estadoAnterior = LOW; 
+const int muestrasPorPeriodo = 100;
+
 String MODO = "DC";
 String signo1 = "";
 String signo2 = "";
 String signo3 = "";
 String signo4 = "";
+String rms = "";
 int Volt1;
 int Volt2;
 int Volt3;
@@ -69,6 +72,7 @@ void loop() {
 
 
   if(MODO=="DC"){
+    rms = "";
     
     if(S1 == HIGH){
       signo1="-";
@@ -105,9 +109,37 @@ void loop() {
 
   }
   else if(MODO=="AC"){
+    int MaxV1 = 0;
+    int MaxV2 = 0;
+    int MaxV3 = 0;
+    int MaxV4 = 0;
+    rms = " rms";
+ 
+    for (int i = 0; i < muestrasPorPeriodo; ++i) {
+      V1 = analogRead(PIN_A4);
+      MaxV1 = max(MaxV1, V1);
+    }
 
+    for (int i = 0; i < muestrasPorPeriodo; ++i) {
+      V2 = analogRead(PIN_A5);
+      MaxV2 = max(MaxV2, V2);
+    }
 
-    
+    for (int i = 0; i < muestrasPorPeriodo; ++i) {
+      V3 = analogRead(PIN_A2);
+      MaxV3 = max(MaxV3, V3);
+    }
+
+    for (int i = 0; i < muestrasPorPeriodo; ++i) {
+      V4 = analogRead(PIN_A3);
+      MaxV4 = max(MaxV4, V4);
+    }
+
+    Volt1=(MaxV1/42)*0.707;
+    Volt2=(MaxV2/42)*0.707;
+    Volt3=(MaxV3/42)*0.707;
+    Volt4=(MaxV4/42)*0.707;
+  
   }
 
 
@@ -121,21 +153,26 @@ void loop() {
   lcd.print("V1: ");
   lcd.print(signo1);
   lcd.print(Volt1,DEC);
+  lcd.print(rms);
+
 
   lcd.setCursor(0, 3);
   lcd.print("V2: ");
   lcd.print(signo2);
   lcd.print(Volt2,DEC);
+  lcd.print(rms);
 
   lcd.setCursor(0, 4);
   lcd.print("V3: ");
   lcd.print(signo3);
   lcd.print(Volt3,DEC);
+  lcd.print(rms);
 
   lcd.setCursor(0, 5);
   lcd.print("V4: ");
   lcd.print(signo4);
   lcd.print(Volt4,DEC);
+  lcd.print(rms);
   delay(200);
 }
 
