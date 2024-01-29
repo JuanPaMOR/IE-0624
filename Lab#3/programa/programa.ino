@@ -1,6 +1,5 @@
 #include <PCD8544.h>
 
-// Pines analógicos
 #define PIN_A2 A2
 #define PIN_A3 A3
 #define PIN_A4 A4
@@ -11,7 +10,6 @@
 #define PIN_SIGNO3 11
 #define PIN_SIGNO4 12
 
-// A custom glyph (a smiley)...
 static const byte glyph[] = { B00010000, B00110100, B00110000, B00110100, B00010000 };
 static PCD8544 lcd;
 int estadoAnterior = LOW; 
