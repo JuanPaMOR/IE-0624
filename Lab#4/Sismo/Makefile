@@ -1,7 +1,7 @@
 CFLAGS = -DTEST
 OBJS = sdram.o clock.o console.o lcd-spi.o gfx.o
 
-BINARY = lcd-serial
+BINARY = Sismografo
 
 LDLIBS += -lm
 
