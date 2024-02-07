@@ -1,4 +1,8 @@
+#include <stdlib.h>
 #include <stdint.h>
+#include <errno.h>
+#include <unistd.h>
+#include <libopencm3/cm3/nvic.h>
 #include <libopencm3/stm32/rcc.h>
 #include <libopencm3/stm32/gpio.h>
 #include <libopencm3/stm32/spi.h>
@@ -11,16 +15,11 @@
 #include "lcd-spi.h"
 #include "gfx.h"
 
-
-
-
-
 uint16_t read_reg(int reg);
 void write_reg(uint8_t reg, uint8_t value);
 uint8_t read_xyz(int16_t vecs[3]);
 void put_status(char *m);
 int print_decimal(int num);
-
 
 static void spi_setup(void)
 {
@@ -262,7 +261,30 @@ static void button_setup(void)
 	gpio_mode_setup(GPIOA, GPIO_MODE_INPUT, GPIO_PUPD_NONE, GPIO0);
 }
 
-char *axes[] = { "X: ", "Y: ", "Z: " };
+// configuración puertos conversión analógico digital, lectura nivel carga batería
+static void adc_setup(void)
+{
+	/* And ADC*/
+	rcc_periph_clock_enable(RCC_ADC1);
+	gpio_mode_setup(GPIOB, GPIO_MODE_ANALOG, GPIO_PUPD_NONE, GPIO0);
+	adc_power_off(ADC1);
+	adc_disable_scan_mode(ADC1);
+	adc_set_sample_time_on_all_channels(ADC1, ADC_SMPR_SMP_480CYC);
+	adc_power_on(ADC1);
+}
+
+static uint16_t read_adc_naiive(uint8_t channel)
+{
+	uint8_t channel_array[16];
+	channel_array[0] = channel;
+	adc_set_regular_sequence(ADC1, 1, channel_array);
+	adc_start_conversion_regular(ADC1);
+	while (!adc_eoc(ADC1));
+	uint16_t reg16 = adc_read_regular(ADC1);
+	return reg16;
+}
+
+char *axes[] = { "X: ", "Y: ", "Z: ", "transmite", "bateria" };
 
 
 
@@ -282,11 +304,20 @@ char *axes[] = { "X: ", "Y: ", "Z: " };
 
 #define GYR_OUT_X_L		0x28
 #define GYR_OUT_X_H		0x29
- 
 
 
 int main(void)
 {
+	//Vi tensión entreda divisor tensión, r1 resistencia 10K, r2 resistencia 1k
+	//la tensión de entrada al pin medidor tensión de la batería se encuntra en r2
+	//Vi tensión entreda divisor tensión, r1 resistencia 10K, r2 resistencia 1k
+	//la tensión de entrada al pin medidor tensión de la batería se encuntra en r2
+	float vi;
+	int r1 = 10000;
+	int r2 = 1000;
+	uint16_t input_adc0;
+	float inputVoltaje;
+
 	int estado = 0;
 	int16_t vecs[3];
 	int16_t baseline[3], XYZ[3];
@@ -294,7 +325,7 @@ int main(void)
 	int count;
 	uint32_t cr_tmp;
 	char *T="NO";
-	char *Vol="HOLA";
+	char *Vol="CARGA";
 	char X[10], Y[10], Z[10];
 
 	gpio_setup();
@@ -304,6 +335,7 @@ int main(void)
 	gfx_fillScreen(LCD_WHITE);
 	clock_setup();
 	button_setup();
+	adc_setup();
 	
 	console_setup(115200);
 	sdram_init();
@@ -336,6 +368,26 @@ int main(void)
 
 	while (1) {
 
+		/*Determina nivel carga batería*/
+		input_adc0 = read_adc_naiive(8);
+
+
+		//INPUT VOLTAGE = (ADC Value / ADC Resolution) * Reference Voltage
+		//Resolution = 4096 Reference = 3.3V
+		inputVoltaje = (input_adc0 / 4096);
+		inputVoltaje = inputVoltaje * 3.3;
+
+		//Se despeja el valor de Vi a partir de los valores conocidos de resistencia y tensión del pin
+		vi = (r1 + r2)/r2;
+		vi = vi * inputVoltaje * 0.1;
+
+		if(vi<=7){
+		Vol="Baja";
+		}
+		else{
+		Vol="Cargada";
+		} /*Fin Determina nivel carga batería*/
+
 		if (gpio_get(GPIOA, GPIO0)) {
 			if(estado==0){
 				estado = 1;
@@ -360,6 +412,9 @@ int main(void)
 
 		if(estado==1){
 
+			axes[3] = Vol;
+			axes[4] = T;
+
 		    tmp = read_xyz(vecs);
 		    for (i = 0; i < 3; i++) {
 		        int pad;
@@ -372,7 +427,10 @@ int main(void)
 		            console_puts(" ");
 		        }
 		    }
-		    console_putc('\r');
+		    console_puts(axes[3]);
+			console_puts(" ");
+			console_puts(axes[4]);
+		    //console_putc('\r');
 		    if (count == 100) {
 		        baseline[0] = vecs[0];
 		        baseline[1] = vecs[1];
@@ -388,6 +446,8 @@ int main(void)
   		sprintf(Z, "%d", XYZ[2]);
 
 		lcd( X, Y, Z, Vol, T);
+
+		console_puts("\n");
 	}
 
 }
