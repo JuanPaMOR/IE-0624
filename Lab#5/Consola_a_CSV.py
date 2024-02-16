@@ -2,14 +2,14 @@ import serial
 import time
 import csv
 
-ser = serial.Serial(port='/tmp/ttyS1',baudrate=9600)
+
+ser = serial.Serial(port='/dev/ttyACM0',baudrate=9600)
 
 time.sleep(1)
 
-archivo = "datos.csv"
+archivo = "Movimiento Circulo"
 
 titulo = ['X','Y','Z']
-
 
 with open(archivo, mode='w', newline='') as datos:
     writer = csv.writer(datos)
@@ -17,12 +17,15 @@ with open(archivo, mode='w', newline='') as datos:
 
 
 while True:
-    Voltajes = ser.readline().decode('ascii')
-    Voltajes = Voltajes.split(',')
+    XYZ = ser.readline().decode('ascii')
+    XYZ = XYZ.split(',')
     with open(archivo, mode='a', newline='') as datos:
         writer = csv.writer(datos)
-        writer.writerow(Voltajes)
-        
+        writer.writerow(XYZ)
+
+
+
+
 
 
 
